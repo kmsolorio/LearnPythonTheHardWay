@@ -49,7 +49,7 @@ def test_parse_object_with_direction():
   assert_equal(result, ('direction', 'north'))
 
 @raises(ParseError)
-def test_parse_object_with_direction():
+def test_parse_object_with_direction_raises_error():
   parse_object(empty_word_list())
 
 def test_parse_subject():
@@ -59,6 +59,16 @@ def test_parse_subject():
   assert_equal(result.verb, 'go' )
   assert_equal(result.object, 'north' )
 
+def test_parse_sentence():
+  sentence_list = [('stop', 'of'), ('verb', 'go'), ('direction', 'north')]
+  result = parse_sentence(sentence_list)
+  assert_equal(result.subject, 'player')
+  assert_equal(result.verb, 'go')
+  assert_equal(result.object, 'north')
+
+@raises(ParseError)
+def test_parse_sentence_raises_error():
+  parse_sentence(word_list())
 
 #Givens
 
